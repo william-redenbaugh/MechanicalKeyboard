@@ -20,4 +20,6 @@ void app_main_statemachine_thread(void *params){
         // Sleep for 200 milliseconds.
         vTaskDelay((200L * configTICK_RATE_HZ) / 1000L);
     }
+
+    vTaskDelete(NULL);
 }
