@@ -1,3 +1,6 @@
 [submodule "Firmware/FirmwareMK/lib/STM32FreeRTOS"]
 	path = Firmware/FirmwareMK/lib/STM32FreeRTOS
 	url = git@github.com:stm32duino/STM32FreeRTOS.git
+[submodule "desktopApp"]
+	path = desktopApp
+	url = https://github.com/andy9879/-MechanicalKeyboardDesktopApp.git
