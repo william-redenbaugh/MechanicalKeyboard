@@ -1,0 +1,3 @@
+[submodule "desktopApp"]
+	path = desktopApp
+	url = https://github.com/andy9879/-MechanicalKeyboardDesktopApp.git
