@@ -30,7 +30,10 @@ void lptaskthread(void *params){
     for(;;){
         vTaskDelay((40L * configTICK_RATE_HZ) / 1000L);
         // Iterate and go through items on list until it's empty
-        lptask_run_task();
+        while(num_tasks > 0){
+            lptask_run_task();
+            vTaskDelay((1L * configTICK_RATE_HZ) / 1000L);
+        }
     }
 
     vTaskDelete(NULL);
