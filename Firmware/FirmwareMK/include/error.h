@@ -32,4 +32,10 @@
  */
 #define MK_NOT_INITED (-5)
 
+/**
+ * @brief When we no longer have anymore elements in our list
+ * 
+ */
+#define MK_LIST_EMPTY (-6)
+
 #endif
