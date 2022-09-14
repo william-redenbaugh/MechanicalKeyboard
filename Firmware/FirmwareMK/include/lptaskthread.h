@@ -10,7 +10,7 @@
 /**
  * @brief Function prototype that we can use to pass in functions into our low priority thread handler
  */
-typedef void(*lptaskfunc_t)(void);
+typedef void(*lptaskfunc_t)();
 
 /**
  * @brief Thread that handles all of our low priority task stuff
@@ -25,6 +25,6 @@ void lptaskthread(void *params);
  *
  * @param task
  */
-int lptask_add_task(lptaskfunc_t task);
+int lptask_add_task(lptaskfunc_t func);
 
 #endif

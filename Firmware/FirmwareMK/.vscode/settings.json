@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "*.tcc": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp"
     }
 }
