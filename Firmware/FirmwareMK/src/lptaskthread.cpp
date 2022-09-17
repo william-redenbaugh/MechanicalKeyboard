@@ -49,7 +49,7 @@ int lptask_run_task(void){
     }
     num_tasks--;
     lptaskfunc_t func = task_list[rear];
-    
+
     rear++;
     if(rear == LPTASK_MAX_TASKS){
         rear = 0;
@@ -65,15 +65,15 @@ int lptask_add_task(lptaskfunc_t func){
     if(lptaskthread_init == false){
         return MK_NOT_INITED;
     }
-    
+
     xSemaphoreTake(lptask_muttx, portMAX_DELAY);
     if(num_tasks >= (LPTASK_MAX_TASKS - 1)){
         xSemaphoreGive(lptask_muttx);
         return MK_LOW_MEM_ERR;
     }
     num_tasks++;
-    task_list[front] = func; 
-    
+    task_list[front] = func;
+
     front++;
     if(front == LPTASK_MAX_TASKS){
         front = 0;
