@@ -4,3 +4,6 @@
 [submodule "desktopApp"]
 	path = desktopApp
 	url = https://github.com/andy9879/-MechanicalKeyboardDesktopApp.git
+[submodule "Firmware/FirmwareMK/lib/Adafruit_NeoPixel"]
+	path = Firmware/FirmwareMK/lib/Adafruit_NeoPixel
+	url = git@github.com:adafruit/Adafruit_NeoPixel.git
