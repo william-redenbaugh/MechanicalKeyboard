@@ -2,6 +2,7 @@
 #define _EVENT_TYPE_LIST_H
 
 typedef enum{
+    EVENT_NONE = 0,
     EVENT_KEYSTROKE, 
     EVENT_LED_UPDATE, 
     EVENT_DISPLAY_UPDATE,

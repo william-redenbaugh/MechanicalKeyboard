@@ -6,7 +6,7 @@
 
 static I2C_HandleTypeDef hi2c1;
 static char *buffer = NULL;
-static uint8_t addr = 0x27;
+static uint8_t addr = 0x3F;
 
 static uint8_t i2c_write(uint8_t *data, uint8_t len);
 static uint8_t i2c_read(uint8_t *data, uint8_t len);
@@ -290,7 +290,9 @@ static void gpio_i2c_init(void);
 i2cLcd_HandleTypeDef h_lcd;
 
 void init_lcd(int width, int height){
-    // Setup GPIO and i2c peripherals
+
+    /*
+	// Setup GPIO and i2c peripherals
     gpio_i2c_init();
 
     i2cLcd_CreateHandle(&h_lcd, &hi2c1, addr);
@@ -303,6 +305,9 @@ void init_lcd(int width, int height){
         i2cLcd_SendChar(&h_lcd, strData[i]);
         i++;
     }
+	*/
+
+
 }
 
 void gpio_i2c_init(void){
