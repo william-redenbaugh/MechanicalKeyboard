@@ -7,3 +7,6 @@
 [submodule "Firmware/FirmwareMK/lib/Adafruit_NeoPixel"]
 	path = Firmware/FirmwareMK/lib/Adafruit_NeoPixel
 	url = git@github.com:adafruit/Adafruit_NeoPixel.git
+[submodule "MKRustBackend"]
+	path = MKRustBackend
+	url = git@github.com:william-redenbaugh/MKRustBackend.git
