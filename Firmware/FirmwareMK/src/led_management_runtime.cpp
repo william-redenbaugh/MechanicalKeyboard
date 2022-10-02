@@ -60,23 +60,42 @@ static void MX_DMA_Init(void)
 
 }
 
+
+// Define the LED pin is attached
+const uint8_t LED_PIN = PC13;
+
+void turn_on_light(void){
+    // Turn LED on.
+    digitalWrite(LED_PIN, HIGH);
+}
+
+void turn_off_light(void){
+    // Signal thread 1 to turn LED off.
+    digitalWrite(LED_PIN, LOW);
+}
+
+#include "event_management.h"
 void led_management_thread(void *params){
     (void)params;
 
-    //MX_SPI1_Init();
+    pinMode(LED_PIN, OUTPUT);
+    event_type_t events[] = {
+      EVENT_STATUS_LED_ON, 
+      EVENT_STATUS_LED_OFF,
+    };
 
-    SPI.begin();
-    SPI.setClockDivider(SPI_CLOCK_DIV8);
-
+    int event_sub = subscribe_eventlist(events, 2, 8);
     for(;;){
-        for(int n = 0; n < 64; n++){
-            Color k;
-            k.R = 10;
-            k.G = 0;
-            k.B = 10;
-            setLed(n, k);
-        }
-        show(&SPI._spi.handle);
-        MK_TASK_DELAY_MS(200);
+       event_data_t event = consume_event(event_sub);
+
+       switch(event.event){
+        case EVENT_STATUS_LED_OFF:
+        turn_off_light();
+        break;
+
+        case EVENT_STATUS_LED_ON:
+        turn_on_light();
+        break;
+       }
     }
 }

@@ -13,16 +13,21 @@ static int num_subscribed_events[NUM_THREADS];
 
 int num_eventspaces = 0;
 
+static SemaphoreHandle_t event_management_mutx;
+
 void event_management_thread(void *parameters){
     global_eventspace = xQueueCreate(32, sizeof(event_data_t));
     subscribed_eventspaces = (event_type_t**)malloc(sizeof(event_type_t*) * NUM_THREADS);
     memset(num_subscribed_events, 0, sizeof(num_subscribed_events));
+    event_management_mutx = xSemaphoreCreateMutex();
+
     event_management_init = true;
     for(;;){
         event_data_t event;
         xQueueReceive(global_eventspace, &event, portMAX_DELAY);
 
         // Go through all the local event spaces, publish to whoever is subscribed to them
+        xSemaphoreTake(event_management_mutx, portMAX_DELAY);
         for(int n = 0; n < num_eventspaces; n++){
             for(int i = 0; i < num_subscribed_events[n]; i++){
                 if(subscribed_eventspaces[n][i] == event.event){
@@ -30,6 +35,7 @@ void event_management_thread(void *parameters){
                 }
             }
         }
+        xSemaphoreGive(event_management_mutx);
     }
 }
 
@@ -56,6 +62,7 @@ int subscribe_eventlist(event_type_t *event_list, int num_events, int event_leng
         return MK_INT_ERR;
     }
 
+    xSemaphoreTake(event_management_mutx, portMAX_DELAY);
     local_eventspaces[num_eventspaces] = xQueueCreate(sizeof(event_data_t), event_length_max);
     subscribed_eventspaces[num_eventspaces] = (event_type_t*)malloc(sizeof(event_type_t) * num_events);
 
@@ -63,9 +70,10 @@ int subscribe_eventlist(event_type_t *event_list, int num_events, int event_leng
     for(int n = 0; n < num_events; n++){
         subscribed_eventspaces[num_eventspaces][n] = event_list[n];
     }
-
+    num_subscribed_events[num_eventspaces] = num_events;
     int ret = num_eventspaces;
     num_eventspaces++;
+    xSemaphoreGive(event_management_mutx);
     return ret;
 }
 
