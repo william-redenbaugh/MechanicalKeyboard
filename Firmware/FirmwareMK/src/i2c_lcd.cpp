@@ -299,7 +299,7 @@ void init_lcd(int width, int height){
     i2cLcd_Init(&h_lcd);
     i2cLcd_ClearDisplay(&h_lcd);
     const char *strData = "Hello World";
-    
+
     int i = 0;
     while(strData[i]) {
         i2cLcd_SendChar(&h_lcd, strData[i]);

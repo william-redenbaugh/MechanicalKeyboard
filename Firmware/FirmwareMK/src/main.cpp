@@ -10,7 +10,7 @@ void setup() {
   // Initialize all of our threads.
   HAL_Init();
   SystemClock_Config();
-  
+
   threads_list_init();
   vTaskStartScheduler();
   Serial.println("Insufficient RAM");

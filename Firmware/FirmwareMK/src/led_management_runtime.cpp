@@ -80,7 +80,7 @@ void led_management_thread(void *params){
 
     pinMode(LED_PIN, OUTPUT);
     event_type_t events[] = {
-      EVENT_STATUS_LED_ON, 
+      EVENT_STATUS_LED_ON,
       EVENT_STATUS_LED_OFF,
     };
 
